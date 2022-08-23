@@ -32,7 +32,73 @@ Infinity делать не нужно, однако, в случае если б
 <script>
   "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  /**
+   * Sum of two numers.
+   * @param {number} a Первое слагаемое.
+   * @param {number} b Второе слагаемое.
+   * @return {number} Результат a + b.
+   */
+  function add(a, b) {
+    return a + b;
+    }
+  
+  /**
+   * Abs sub of two numers.
+   * @param {number} a Первое число.
+   * @param {number} b Второе число.
+   * @return {number} Результат модуль a - b.
+   */
+  function sub(a, b) {
+    return Math.abs(a - b);
+    }
+
+
+
+  /**
+   * Product of two numers.
+   * @param {number} a Первый множитель.
+   * @param {number} b Второй множитель.
+   * @return {number} Результат a * b.
+   */
+  function mul(a, b) {
+    return a * b;
+    }
+
+
+  /**
+   * Division of two numers.
+   * @param {number} a Делимое.
+   * @param {number} b Делитель.
+   * @return {number} Результат a / b.
+   */
+  function div(a, b){
+    return a / b;
+    }
+
+  /**
+   * Calculate operation of two numers.
+   * @param {number} arg1 Первое число.
+   * @param {number} arg2 Второе число.
+   * @param {string} operation Операция да числами "+", "-", "*", "/".
+   * @return {number} Результат a operation b.
+   */
+  function mathOperation(arg1, arg2, operation){
+    switch(operation) {
+        case "+":
+          return add(arg1, arg2);
+        case "-":
+          return sub(arg1, arg2);
+        case "*":
+          return mul(arg1, arg2);
+        case "/":
+          return div(arg1, arg2);
+        default:
+          return NaN;
+      }
+
+    }
+
+
 </script>
 </body>
 </html>

@@ -21,7 +21,29 @@
 <script>
   "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  let a = parseInt(prompt("a = "));
+  let b = parseInt(prompt("b = "));
+
+
+  if (Math.sign(a) == Math.sign(b)){
+
+      if (a > 0){
+
+        console.log(a - b);
+
+        } else if (a < 0) {
+
+            console.log(a * b);
+
+          }
+
+    } else{
+
+        console.log(a + b);
+
+      }
+
+
 </script>
 </body>
 </html>
