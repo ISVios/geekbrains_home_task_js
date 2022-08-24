@@ -24,23 +24,14 @@
   const a = +prompt("a = ");
   const b = +prompt("b = ");
 
-
-  if (Math.sign(a) == Math.sign(b)){
-
+    if (Math.sign(a) === Math.sign(b)) {
       if (a > 0){
-
         console.log(a - b);
-
-        } else if (a < 0) {
-
-            console.log(a * b);
-
+      } else if (a < 0) {
+       console.log(a * b);
           }
-
-    } else{
-
-        console.log(a + b);
-
+      } else if(a !== 0 && b !== 0) {
+      console.log(a + b);
       }
 
 </script>
