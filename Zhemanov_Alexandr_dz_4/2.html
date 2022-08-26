@@ -49,8 +49,67 @@
 -->
 <script>
   "use strict";
+  
+  // PostES5
+  
+  function PostES5(authorName, postText) {
+    this.authorName = authorName;
+    this.postText = postText;
+    this.postDate = new Date();
+    // we can't use edit(postText); - no exist
+  }
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  PostES5.prototype.edit = function (newText) {
+    this.postText = newText
+    this.postDate = new Date();
+  }
+
+  //PostES6
+
+  class PostES6 {
+
+    constructor(authorName, postText) {
+      this.authorName = authorName;
+      this.postText = postText;
+      this.postDate = new Date();
+    }
+
+    edit(newText) {
+      this.postText = newText;
+    }
+  }
+
+//-----------------------------------------------------------------------------
+
+  // AttachedPostES5
+
+  function AttachedPostES5(authorName, postText) {
+    PostES5.call(this, authorName, postText);
+    this.highlighted = false;
+  }
+
+  AttachedPostES5.prototype = Object.create(PostES5.prototype);
+  AttachedPostES5.prototype.constryctor = AttachedPostES5;
+  
+
+  AttachedPostES5.prototype.makeTextHighlighted = function () {
+    this.highlighted = true; 
+  }
+
+  // AttachedPostES6
+  
+  class AttachedPostES6 extends PostES6 {
+
+    constructor(authorName, postText) {
+      super(authorName, postText);
+      this.highlighted = false;
+    }
+
+    makeTextHighlighted() {
+      this.highlighted = true;
+    }
+  }
+
 </script>
 </body>
 </html>

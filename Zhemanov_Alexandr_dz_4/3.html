@@ -30,8 +30,31 @@
 -->
 <script>
   "use strict";
+  
+  /**
+   * Возвращает объект содержащий разряды числа.
+   * @param {number} numberInput - целое цисло в диапазоне [0,999].
+   * @return {object} - объект типа {units - единицы, 
+                                     dozens - десятки, 
+                                     hundreds - сотни}
+   */
+  function getDigitsOfNumber(numberInput) {
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+    if (isNaN(numberInput) ||
+        // Number.IsInteger без преобразование в число(+) не работает.
+        !Number.isInteger(+numberInput) || 
+        numberInput < 0 || numberInput > 999) {
+      console.error("the input must be an integer and " +
+          "be between 0 and 999 inclusive.");
+      return;
+    } 
+    this.hundreds = Math.floor(numberInput / 100) % 10 ?? 0;
+    this.dozens = Math.floor(numberInput / 10) % 10 ?? 0;
+    this.units = numberInput % 10 ?? 0;
+  }
+
+
+
 </script>
 </body>
 </html>
