@@ -42,17 +42,31 @@
   /*
   1. Установите всем элементам с классом "productName" размер шрифта 24px.
    */
+    document.querySelectorAll(".productName").forEach((elem) => {
+      elem.style.fontSize = '24px';
+    });
 
 
   /*
   2. Установите всем элементам с классом "product" внешний отступ справа 50px.
    */
+    document.querySelectorAll(".product").forEach((elem) => {
+      elem.style.marginRight = "50px";
+    });
 
 
   /*
   3. При клике на кнопку "В корзину" название кнопки должно поменяться на
   "Добавлено" и кнопка должна стать неактивной.
    */
+    document.addEventListener("click", (event) => {
+      const targetElem = event.target;
+      if(targetElem.nodeName === "BUTTON") {
+        targetElem.textContent = "Добавлено";
+        targetElem.disabled = 'true';
+      }
+
+    });
 
 
   /*
@@ -63,12 +77,23 @@
   отображенный товар на странице на созданную копию. У данной копии также
   должен правильно работать код из 3-го задания.
    */
+  
+
+  const copyProduct = document.querySelector(".product").cloneNode(true);
+  copyProduct.querySelector(".productName").textContent = "Товар 4";
+  copyProduct.querySelector("img").src = "https://picsum.photos/id/1080/200/300";
+  
+  const lastProduct = Array.from(document.querySelectorAll(".product")).pop();
+  lastProduct.innerHTML = copyProduct.innerHTML;
 
 
   /*
   5. По истечении 2 секунд с момента открытия страницы первый товар должен быть
   удален из html.
    */
+  setTimeout(() =>{
+      document.querySelector(".product").remove();
+  }, 2000);
 
 
 </script>

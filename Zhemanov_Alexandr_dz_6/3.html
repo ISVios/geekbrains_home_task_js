@@ -37,18 +37,45 @@
   1. При наведении на любую из звезд, данной звезде должен ставиться класс
   golden, также такой класс должен ставиться всем звездам до нее слева.
   */
+  const stars = document.querySelectorAll(".stars_container > .fa-star")
+  // открытая функция
+  function setStar(count) {
+    
+    for(let i = 0; i < stars.length; i += 1) {
+      if(count > i) {
+        stars[i].classList.add("golden");
+      } else {
+        stars[i].classList.remove("golden");
+      }
+    }
+  }
+  
+  stars.forEach((elem, index) => {
+    // это ужастно много Listener
+    elem.addEventListener("mouseenter", (event) => {
+      setStar(index + 1);
+    });
+  })
 
 
   /*
   2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
   задания должны быть удалены.
    */
+  const starsContainer = document.querySelector(".stars_container");
+  starsContainer.addEventListener("mouseleave", (event) => {
+    setStar(0);
+  })
 
 
   /*
   3. Когда мы переводим мышь от одной звезды к другой, у нас могут мигать
   звезды (временно могут становиться черными). Почему так? Напишите словами.
   Можем ли мы это исправить? Если да, то предложите решение.
+  */
+  /*
+    решил по-другому (Вдохновился слайдером)
+    нет мигание.
   */
 
 
