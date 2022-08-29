@@ -37,7 +37,7 @@
    */
   console.log(document.querySelector("#super_link"));
   // or
-  //console.log(document.getElementById("super_link"));
+  // console.log(document.getElementById("super_link"));
 
 
   /*
@@ -45,32 +45,31 @@
   поменяйте текст внутри элемента на "ссылка".
    */
   document.querySelectorAll(".card-link").forEach((elem) => {
-    elem.innerText = "ссылка";
-  });
+      elem.innerText = "ссылка";
+    });
   // or
   //const cardLinks = document.getElementsByClassName("card-link");
   //for(let i = 0; i < cardLinks.length; i += 1) {
-  //  cardLinks[i].innerHTML = "ссылка";
+  //  cardLinks[i].innerText = "ссылка";
   //}
+
 
   /*
   3. Найти все элементы на странице с классом "card-link", которые лежат в
   элементе с классом "card-body" и вывести полученную коллекцию в консоль.
    */
   console.log(document.querySelectorAll(".card-body > .card-link"));
-  // or nightmare 
+  // or
   //const cardBody = document.getElementsByClassName("card-body")[0];
-  //const cardLinksInCardBody = cardBody.getElementsByClassName("card-link"); 
+  //const cardLinksInCardBody = cardBody.getElementsByClassName("card-link");
   //console.log(cardLinksInCardBody);
-
 
 
   /*
   4. Найти первый попавшийся элемент на странице у которого есть атрибут
   data-number со значением 50 и вывести его в консоль.
    */
-  document.querySelector("[data-number='50']");
-
+  console.log(document.querySelector("[data-number='50']"));
 
   /*
   5. Выведите содержимое тега title в консоль.
@@ -82,17 +81,18 @@
   6. Получите элемент с классом "card-title" и выведите его родительский узел
   в консоль.
    */
-  console.log(document.querySelector(".card-link").parentElement);
+  console.log(document.querySelector(".card-title").parentNode);
 
 
   /*
   7. Создайте тег `p`, запишите внутри него текст "Привет" и добавьте созданный
   тег в начало элемента, который имеет класс "card".
    */
-  const newP = document.createElement("p");
-  newP.innerText = "Привет";
-  const card = document.querySelector(".card");
-  card.insertAdjacentElement("afterbegin", newP);
+  const newPElm = document.createElement("p");
+  newPElm.innerText = "Привет";
+  
+  const cardClass = document.querySelector(".card");
+  cardClass.insertAdjacentElement("afterbegin", newPElm);
 
 
   /*

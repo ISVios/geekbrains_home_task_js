@@ -33,6 +33,9 @@
   "super-dropdown", необходимо использовать методы forEach и querySelectorAll и
   свойство classList у элементов.
    */
+  document.querySelectorAll(".dropdown-item").forEach((elem) => {
+    elem.classList.add("super-dropdown");
+  });
 
 
   /*
@@ -40,12 +43,13 @@
   присутствует у этого элемента, либо добавить, если такого класса у элемента
   не было.
    */
-
+  document.querySelector(".btn").classList.toggle("btn-secondary");
 
   /*
   3. Необходимо удалить класс "dropdown-menu" у элемента, у которого
   присутствует класс "menu".
    */
+  document.querySelector(".menu").classList.remove("dropdown-menu");
 
 
   /*
@@ -53,22 +57,29 @@
   "dropdown" следующую разметку:
     <a href="#">link</a>
    */
+    document.querySelector("div.dropdown")
+    .insertAdjacentHTML("afterend", "<a href='#'>link</a>");
 
 
   /*
   5. У элемента с id "dropdownMenuButton" замените id на "superDropdown".
    */
-
+  document.getElementById("dropdownMenuButton").id = "superDropdown";
+  //or
+  //document.querySelector("#dropdownMenuButton").id = "superDropdown";
 
   /*
   6. Добавьте атрибут data-dd со значением 3 элементу у которого существует
   атрибут "aria-labelledby" равный "dropdownMenuButton" используя dataset.
    */
-
+    document
+      .querySelector("[aria-labelledby='dropdownMenuButton']")
+      .dataset.dd = 3;
 
   /*
   7. Удалите атрибут type у элемента с классом "dropdown-toggle".
    */
+    document.querySelector(".dropdown-toggle").removeAttribute("type");
 
 
   /*
@@ -77,6 +88,21 @@
   Вывод каждого атрибута и значений должен выглядеть следующим образом (пример):
   Атрибут "class" содержит значение "btn btn-secondary dropdown-toggle"
    */
+    const dropdownToggleBtnAtr = document
+      .querySelector(".dropdown-toggle.btn").attributes;
+    
+    for(const atrub of dropdownToggleBtnAtr) {
+      console.log(
+          `Атрибут \"${atrub.nodeName}\" содержит значение \"${atrub.value}\"`
+      );
+    }
+
+    // or if need index
+    //for(let i = 0; i < dropdownToggleBtnAtr.length; i += 1) {
+    //    console.log(`Атрибут \"${dropdownToggleBtnAtr[i].nodeName}\" содержит ` +
+    //        `значение \"${dropdownToggleBtnAtr[i].nodeValue}\"`
+    //      );
+    //}
 
 
 </script>
