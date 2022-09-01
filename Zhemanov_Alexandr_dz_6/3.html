@@ -12,6 +12,10 @@
     .golden {
       color: gold;
     }
+    /*.stars_container {
+      display: inline-block;
+    }*/
+    
   </style>
 </head>
 <body>
@@ -37,34 +41,40 @@
   1. При наведении на любую из звезд, данной звезде должен ставиться класс
   golden, также такой класс должен ставиться всем звездам до нее слева.
   */
+  const starsContainer = document.querySelector(".stars_container");
   const stars = document.querySelectorAll(".stars_container > .fa-star")
-  // открытая функция
-  function setStar(count) {
-    
-    for(let i = 0; i < stars.length; i += 1) {
-      if(count > i) {
-        stars[i].classList.add("golden");
-      } else {
-        stars[i].classList.remove("golden");
-      }
+  starsContainer.addEventListener("mouseover", ({target}) => {
+    if(target === starsContainer) { // защита от мигание
+      return;
     }
-  }
-  
-  stars.forEach((elem, index) => {
-    // это ужастно много Listener
-    elem.addEventListener("mouseenter", (event) => {
-      setStar(index + 1);
+
+    var selected = true; // что здесь лучше var или let? (мне кажется одинаково) 
+    stars.forEach((elem) => {
+        if(elem === target) { 
+            selected = false;
+            elem.classList.add("golden");
+            return;
+        }
+
+        if(!selected) {
+          elem.classList.remove("golden");
+        } else {
+          elem.classList.add("golden");
+        }
     });
-  })
+  });
 
 
   /*
   2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
   задания должны быть удалены.
    */
-  const starsContainer = document.querySelector(".stars_container");
-  starsContainer.addEventListener("mouseleave", (event) => {
-    setStar(0);
+  // Минус такого решение в том, 
+  // что div .stars_container растянут на всю ширину. 
+  // можно добавить css или js костыль
+  starsContainer.style.display = "inline-block";
+  starsContainer.addEventListener("mouseleave", () => {
+    stars.forEach(elem => elem.classList.remove("golden"));
   })
 
 
@@ -74,8 +84,21 @@
   Можем ли мы это исправить? Если да, то предложите решение.
   */
   /*
-    решил по-другому (Вдохновился слайдером)
-    нет мигание.
+                                     Почему
+ мигание происходить из-за того, что в
+ "starsContainer.addEventListener("mouseover", ({target})", 
+ мы получаем сам starsContainer(между звездами есть пробелы).
+ их видно (кусор мыши меняется на I)
+ 
+                                     Защита
+ Просто игнорируем если target == starsContainer
+
+                                      ПС 
+ Я понял почему у меня отступы(в разборе по другому). 
+ Я пользуюсь Unix системой (Manjaro) т.е utf-8[unix].
+ А файл в utf-8[dos] кодировке. (разный символ переноса строки) \n | \r\n
+ Сначала грешил на редактор(vim), табуляция. хотя может быт то и другое. 
+  
   */
 
 

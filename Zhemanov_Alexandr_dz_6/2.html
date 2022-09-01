@@ -101,24 +101,22 @@
   const formElm = document.querySelector("form"); 
 
   formElm.addEventListener("submit", (event) => {
-      event.target.querySelectorAll(".form-control").forEach((elem) => {
-        if( elem.value === "") {
-          elem.classList.add("error");
-          event.preventDefault();
-        }
-      });
+    event.target.querySelectorAll(".form-control").forEach((elem) => {
+      if(elem.value === "") {
+        elem.classList.add("error");
+        event.preventDefault();
+      }
+    });
   });
 
   formElm.addEventListener("input", (event) => {
     if(event.target.classList.contains("form-control") &&
-       event.target.value === "") {
+      event.target.value === "") {
       event.target.classList.add("error");
     } else {
       event.target.classList.remove("error");
     }
   });
-
-
 
 </script>
 </body>
