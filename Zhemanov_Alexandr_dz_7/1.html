@@ -63,12 +63,16 @@
   const navElm = document.querySelector(".nav");
   const textElm = document.querySelector(".text");
   const navLinks = document.querySelectorAll(".nav-link");
-  navElm.addEventListener("click", (event) => {
-      navLinks.forEach((elem) => {
-        elem.classList.remove("active");
-      })
-      event.target.classList.add("active");
-      textElm.textContent = panelText[event.target.parentNode.dataset.text];
+  navElm.addEventListener("click", ({target}) => {
+    if (target == navElm) {
+      return
+    }
+    
+    navLinks.forEach((elem) => {
+      elem.classList.remove("active");
+    })
+    target.classList.add("active");
+    textElm.textContent = panelText[target.parentNode.dataset.text];
   });
 
 
@@ -78,6 +82,17 @@
   шрифт у текста, никакого резкого увеличения шрифта не должно быть при
   перетаскивании ползунка.
    */
+  const inputDiv = document.querySelector("#inputDiv");
+  const inputRangeElm = document.querySelector("input[type='range']")
+  document.addEventListener('DOMContentLoaded',() => {
+    const currFont = getComputedStyle(inputDiv).fontSize;
+    inputRangeElm.value = +currFont.slice(0, currFont.length - 2)
+
+  });
+
+  inputRangeElm.addEventListener("input", (event) => {
+    inputDiv.style.fontSize = `${event.target.value}px`;
+  });
 
 
 </script>

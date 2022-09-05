@@ -49,7 +49,7 @@
      */
     getProductMarkup() {
       return `
-        <div class="thisuct">
+        <div class="product">
             <div>${this.name}</div>
             <img src="${this.imageUrl}" alt="">
             <div>Цена: <span>${this.price}</span> р.</div>
@@ -83,7 +83,7 @@
       return;
     }
     productsEl.innerHTML = products[event.target.dataset.type]
-        .map(elem => {return elem.getProductMarkup();});
+        .map(elem => {return elem.getProductMarkup();}).join("");
   });
 
 </script>
