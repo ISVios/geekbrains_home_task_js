@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+//@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
 body {
     margin: 0;
     font-family: Lato, sans-serif;
@@ -61,7 +61,6 @@ body {
 }
 
 .cartIconWrap span {
-    display: inline-block;
     width: 19px;
     height: 19px;
     color: white;
@@ -73,6 +72,38 @@ body {
     top: -19px;
     font-size: 12px;
     line-height: 19px;
+}
+
+.basket {
+  position: absolute;
+  right: 0;
+  top: 16;
+  width: 600px;
+  background: #ffffff;
+  box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
+  padding: 16px 16px 16px 16px;
+  z-index: 1;
+  overflow-y: auto;
+}
+
+.basketHeader {
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr);
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.basketElem {
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr);
+  font-size: 14px;
+}
+
+.basketFooter {
+  grid-template-columns: repeat(4, 1fr);
+  font-weight: bold;
+  font-size: 18px;
+  text-align: right;
 }
 
 .newArrivals {
@@ -425,10 +456,41 @@ body {
     font-family: inherit;
 }
 
+.featuredImgDark button:hover {
+    background: white;
+    border: 1px solid black;
+    color: black;
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.featuredImgDark button:active {
+    background: black;
+    border: 1px solid black;
+    color: black;
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
 .featuredImgDark button img {
     width: 26px;
     height: 24px;
     margin-right: 11px;
+}
+
+.featuredImgDark button:hover img {
+    width: 26px;
+    height: 24px;
+    margin-right: 11px;
+    filter: invert(1);
 }
 
 .featuredData {
