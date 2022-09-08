@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 
 let fitlerPopup = document.querySelector('.filterPopup');
 let fitlerLabel = document.querySelector('.filterLabel');
@@ -47,6 +47,7 @@ featuredItems.addEventListener("click", ({target}) => {
   );
 });
 
+
 const basketButton = document.querySelector(".cartIcon");
 const basketPopup = document.querySelector(".basket");
 basketButton.addEventListener("click", () => {
@@ -62,11 +63,13 @@ basket.onProductAddEvent((count) => {
     basketCountNotif.classList.remove("hidden");
   }
   basketCountNotif.textContent = count;
-
+  // upadte basket view
   basketResult.textContent = `$${basket.getResultAllProduct().toFixed(2)}`;
+  // лучше попробовать через createElement
+  // по div.class можно забыть
   basketElemsCont.innerHTML = basket.getProducts()
     .map(([name, [count, price]]) => {
-      return ` <div class='basketElem'>
+      return `<div class='basketElem'>
       <span>${name}</span>
       <span>${count}</span>
       <span>$${price.toFixed(2)}</span>
@@ -75,22 +78,26 @@ basket.onProductAddEvent((count) => {
     }).join("");
 });
 
-
-
-
-
-// add jdoc
+/**
+ *@return{obj} basket api functions.
+ */
 function getBasketApi() {
   let productMap = new Map();
-  let productAddEvent = () => {};
+  let productAddEvent = () => {}; 
   
   /**
-   * @return {Array}
+   * Возвращает массив всех товаров в виде [[name, [count, price]]]
+   * @return {Object[]}
    */
   function getProducts() {
     return Array.from(productMap);
   }
 
+  /**
+   * Возвращает цену за все вещи с названием name.
+   * @parametr{string} название товара
+   * @return{number|nonumber} цена в $$. NaN если товар не найден.
+   */
   function getResultOneTypeProduct(name) {
     if (!productMap.has(name)) {
       return NaN;
@@ -99,7 +106,11 @@ function getBasketApi() {
     let [count, price] = productMap.get(name);
     return price * count;
   }
-
+  
+  /**
+   * Возвращает сумму за все товары в корзине.
+   * @return{number} цена в $$
+   */
   function getResultAllProduct() {
     let all = 0;
     
@@ -110,6 +121,10 @@ function getBasketApi() {
     return all;
   }
 
+  /**
+   * Возвращает кол-во элементов в корзине.
+   * @return{number} 
+   */ 
   function getProductCount() {
     let all = 0;
     
@@ -119,6 +134,11 @@ function getBasketApi() {
     return all;
   }
 
+  /**
+   * Добавить эл-нт в корзину 
+   * @param{string} название товара
+   * @param{number} цена в $$
+   */
   function addProduct(name, price) {
     if (productMap.has(name)) {
       const [count, cPrice] = productMap.get(name);
@@ -129,7 +149,10 @@ function getBasketApi() {
  
     productAddEvent(getProductCount()); 
   }
-  
+  /**
+   * Устанавливает Callback ф-цию при добавление продукта (addProduct) 
+   * @param{requestCallback} функция 
+   */
   function onProductAddEvent(fn) {
     productAddEvent = fn;
   }
@@ -142,3 +165,4 @@ function getBasketApi() {
     onProductAddEvent
   }; 
 }
+
