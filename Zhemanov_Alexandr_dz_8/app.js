@@ -29,22 +29,51 @@ filterSizeWrap.addEventListener('click', function() {
     filterSizes.classList.toggle('hidden');
 });
 
-
 const basket = getBasketApi();
 const featuredItems = document.querySelector(".featuredItems");
+featuredItems.addEventListener("click", ({target}) => {
+  if (target.nodeName !== "BUTTON") {
+    return;
+  }
+  const productRootCont = target.parentNode.parentNode.parentNode;
+  const productName = productRootCont
+    .querySelector(".featuredName").textContent.trim();
+  const productPrice = productRootCont
+    .querySelector(".featuredPrice").textContent.trim();
+ 
+  basket.addProduct(
+    productName, 
+    +(productPrice.slice(1, productPrice.length))
+  );
+});
 
+const basketButton = document.querySelector(".cartIcon");
+const basketPopup = document.querySelector(".basket");
+basketButton.addEventListener("click", () => {
+  basketPopup.classList.toggle("hidden");
+});
 
+const basketElemsCont = document.querySelector(".basketElems");
+const basketResult = document.
+  querySelector(".basketFooter > span:last-child");
+const basketCountNotif = document.querySelector(".cartIconWrap > span");
+basket.onProductAddEvent((count) => {
+  if (count > 0) {
+    basketCountNotif.classList.remove("hidden");
+  }
+  basketCountNotif.textContent = count;
 
-
-
-
-
-
-
-
-
-
-
+  basketResult.textContent = `$${basket.getResultAllProduct().toFixed(2)}`;
+  basketElemsCont.innerHTML = basket.getProducts()
+    .map(([name, [count, price]]) => {
+      return ` <div class='basketElem'>
+      <span>${name}</span>
+      <span>${count}</span>
+      <span>$${price.toFixed(2)}</span>
+      <span>$${basket.getResultOneTypeProduct(name).toFixed(2)}</span>
+        </div>`;
+    }).join("");
+});
 
 
 
@@ -97,7 +126,7 @@ function getBasketApi() {
     } else {
       productMap.set(name, [1, price])
     }
-
+ 
     productAddEvent(getProductCount()); 
   }
   
